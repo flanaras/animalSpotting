@@ -30,28 +30,27 @@
             <script>
                 function initMap() {
                     var uluru = {lat: -25.363, lng: 131.044};
-                    var uluru2 = {lat: -20.353, lng: 131.604};
                     var map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 4,
                         center: uluru
                     });
-                    var marker = new google.maps.Marker({
-                        position: uluru,
-                        map: map
-                    });
 
-                    var marker2 = new google.maps.Marker({
-                        position: uluru2,
-                        map: map
-                    });
+                    var vm = window;
+                    for (i = 0; i < vm.sightings.length; i++)
+                    {
+                        var sight = vm.sightings[i];
+                        var uluru = {lat: sight.latitude, lng: sight.longitude};
+                        var marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map
+                        });
+
+                    }
                 }
             </script>
             <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLGnwjlilHQ-IeP3vm1YSWeo2584d9swU&callback=initMap">
             </script>
-
-
-            <div ng-repeat="(sighting) in vm.sightings">Location: {sighting.location} </div>
 
             <p data-translate="home.question">
                 If you have any question on JHipster:

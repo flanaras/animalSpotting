@@ -5,7 +5,7 @@
         .module('animalSpottingApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', 'Sighting', '$state'];
 
     function HomeController ($scope, Principal, LoginService, Sighting, $state) {
         var vm = this;
@@ -25,12 +25,12 @@
 
         function loadSightings () {
             Sighting.query({
-                page: pagingParams.page - 1,
+                page: 0,
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                var result = ['id,' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
@@ -38,15 +38,10 @@
             }
 
             function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
-                vm.sightings = data;
-                vm.page = pagingParams.page;
+                window.sightings = data;
             }
 
             function onError(error) {
-                AlertService.error(error.data.message);
             }
         }
 
