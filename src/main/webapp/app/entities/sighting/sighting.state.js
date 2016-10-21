@@ -125,7 +125,8 @@
                         entity: function () {
                             return {
                                 date: null,
-                                location: null,
+                                longitude: null,
+                                latitude: null,
                                 count: null,
                                 id: null
                             };

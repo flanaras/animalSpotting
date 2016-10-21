@@ -45,8 +45,11 @@ public class SightingResourceIntTest {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_LOCATION = "AAAAA";
-    private static final String UPDATED_LOCATION = "BBBBB";
+    private static final Float DEFAULT_LONGITUDE = 1F;
+    private static final Float UPDATED_LONGITUDE = 2F;
+
+    private static final Float DEFAULT_LATITUDE = 1F;
+    private static final Float UPDATED_LATITUDE = 2F;
 
     private static final Integer DEFAULT_COUNT = 1;
     private static final Integer UPDATED_COUNT = 2;
@@ -86,7 +89,8 @@ public class SightingResourceIntTest {
     public static Sighting createEntity(EntityManager em) {
         Sighting sighting = new Sighting()
                 .date(DEFAULT_DATE)
-                .location(DEFAULT_LOCATION)
+                .longitude(DEFAULT_LONGITUDE)
+                .latitude(DEFAULT_LATITUDE)
                 .count(DEFAULT_COUNT);
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
@@ -123,16 +127,35 @@ public class SightingResourceIntTest {
         assertThat(sightings).hasSize(databaseSizeBeforeCreate + 1);
         Sighting testSighting = sightings.get(sightings.size() - 1);
         assertThat(testSighting.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testSighting.getLocation()).isEqualTo(DEFAULT_LOCATION);
+        assertThat(testSighting.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testSighting.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testSighting.getCount()).isEqualTo(DEFAULT_COUNT);
     }
 
     @Test
     @Transactional
-    public void checkLocationIsRequired() throws Exception {
+    public void checkLongitudeIsRequired() throws Exception {
         int databaseSizeBeforeTest = sightingRepository.findAll().size();
         // set the field null
-        sighting.setLocation(null);
+        sighting.setLongitude(null);
+
+        // Create the Sighting, which fails.
+
+        restSightingMockMvc.perform(post("/api/sightings")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(sighting)))
+                .andExpect(status().isBadRequest());
+
+        List<Sighting> sightings = sightingRepository.findAll();
+        assertThat(sightings).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLatitudeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sightingRepository.findAll().size();
+        // set the field null
+        sighting.setLatitude(null);
 
         // Create the Sighting, which fails.
 
@@ -157,7 +180,8 @@ public class SightingResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(sighting.getId().intValue())))
                 .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-                .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+                .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+                .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
                 .andExpect(jsonPath("$.[*].count").value(hasItem(DEFAULT_COUNT)));
     }
 
@@ -173,7 +197,8 @@ public class SightingResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sighting.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
             .andExpect(jsonPath("$.count").value(DEFAULT_COUNT));
     }
 
@@ -196,7 +221,8 @@ public class SightingResourceIntTest {
         Sighting updatedSighting = sightingRepository.findOne(sighting.getId());
         updatedSighting
                 .date(UPDATED_DATE)
-                .location(UPDATED_LOCATION)
+                .longitude(UPDATED_LONGITUDE)
+                .latitude(UPDATED_LATITUDE)
                 .count(UPDATED_COUNT);
 
         restSightingMockMvc.perform(put("/api/sightings")
@@ -209,7 +235,8 @@ public class SightingResourceIntTest {
         assertThat(sightings).hasSize(databaseSizeBeforeUpdate);
         Sighting testSighting = sightings.get(sightings.size() - 1);
         assertThat(testSighting.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testSighting.getLocation()).isEqualTo(UPDATED_LOCATION);
+        assertThat(testSighting.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testSighting.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testSighting.getCount()).isEqualTo(UPDATED_COUNT);
     }
 

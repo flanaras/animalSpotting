@@ -27,8 +27,15 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "location",
-            "fieldType": "String",
+            "fieldName": "longitude",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]

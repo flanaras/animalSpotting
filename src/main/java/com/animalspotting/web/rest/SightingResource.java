@@ -1,9 +1,9 @@
 package com.animalspotting.web.rest;
 
+import com.animalspotting.service.SightingService;
 import com.codahale.metrics.annotation.Timed;
 import com.animalspotting.domain.Sighting;
 
-import com.animalspotting.repository.SightingRepository;
 import com.animalspotting.web.rest.util.HeaderUtil;
 import com.animalspotting.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -31,9 +31,9 @@ import java.util.Optional;
 public class SightingResource {
 
     private final Logger log = LoggerFactory.getLogger(SightingResource.class);
-        
+
     @Inject
-    private SightingRepository sightingRepository;
+    private SightingService sightingService;
 
     /**
      * POST  /sightings : Create a new sighting.
@@ -51,7 +51,7 @@ public class SightingResource {
         if (sighting.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("sighting", "idexists", "A new sighting cannot already have an ID")).body(null);
         }
-        Sighting result = sightingRepository.save(sighting);
+        Sighting result = sightingService.save(sighting);
         return ResponseEntity.created(new URI("/api/sightings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("sighting", result.getId().toString()))
             .body(result);
@@ -75,7 +75,7 @@ public class SightingResource {
         if (sighting.getId() == null) {
             return createSighting(sighting);
         }
-        Sighting result = sightingRepository.save(sighting);
+        Sighting result = sightingService.save(sighting);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("sighting", sighting.getId().toString()))
             .body(result);
@@ -95,7 +95,7 @@ public class SightingResource {
     public ResponseEntity<List<Sighting>> getAllSightings(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Sightings");
-        Page<Sighting> page = sightingRepository.findAll(pageable);
+        Page<Sighting> page = sightingService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sightings");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -112,7 +112,7 @@ public class SightingResource {
     @Timed
     public ResponseEntity<Sighting> getSighting(@PathVariable Long id) {
         log.debug("REST request to get Sighting : {}", id);
-        Sighting sighting = sightingRepository.findOne(id);
+        Sighting sighting = sightingService.findOne(id);
         return Optional.ofNullable(sighting)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -132,7 +132,7 @@ public class SightingResource {
     @Timed
     public ResponseEntity<Void> deleteSighting(@PathVariable Long id) {
         log.debug("REST request to delete Sighting : {}", id);
-        sightingRepository.delete(id);
+        sightingService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("sighting", id.toString())).build();
     }
 

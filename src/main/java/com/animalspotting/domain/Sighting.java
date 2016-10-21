@@ -24,8 +24,12 @@ public class Sighting implements Serializable {
     private LocalDate date;
 
     @NotNull
-    @Column(name = "location", nullable = false)
-    private String location;
+    @Column(name = "longitude", nullable = false)
+    private Float longitude;
+
+    @NotNull
+    @Column(name = "latitude", nullable = false)
+    private Float latitude;
 
     @Min(value = 1)
     @Column(name = "count")
@@ -60,17 +64,30 @@ public class Sighting implements Serializable {
         this.date = date;
     }
 
-    public String getLocation() {
-        return location;
+    public Float getLongitude() {
+        return longitude;
     }
 
-    public Sighting location(String location) {
-        this.location = location;
+    public Sighting longitude(Float longitude) {
+        this.longitude = longitude;
         return this;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public Sighting latitude(Float latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 
     public Integer getCount() {
@@ -137,7 +154,8 @@ public class Sighting implements Serializable {
         return "Sighting{" +
             "id=" + id +
             ", date='" + date + "'" +
-            ", location='" + location + "'" +
+            ", longitude='" + longitude + "'" +
+            ", latitude='" + latitude + "'" +
             ", count='" + count + "'" +
             '}';
     }

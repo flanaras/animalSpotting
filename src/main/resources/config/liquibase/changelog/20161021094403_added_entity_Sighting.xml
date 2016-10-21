@@ -25,7 +25,11 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="location" type="varchar(255)">
+            <column name="longitude" type="${floatType}">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="latitude" type="${floatType}">
                 <constraints nullable="false" />
             </column>
             

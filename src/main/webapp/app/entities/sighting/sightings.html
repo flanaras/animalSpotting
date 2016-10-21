@@ -20,7 +20,8 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="date"><span data-translate="animalSpottingApp.sighting.date">Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="location"><span data-translate="animalSpottingApp.sighting.location">Location</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longitude"><span data-translate="animalSpottingApp.sighting.longitude">Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="latitude"><span data-translate="animalSpottingApp.sighting.latitude">Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="count"><span data-translate="animalSpottingApp.sighting.count">Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.id"><span data-translate="animalSpottingApp.sighting.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="animal.name"><span data-translate="animalSpottingApp.sighting.animal">Animal</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -31,7 +32,8 @@
                 <tr ng-repeat="sighting in vm.sightings track by sighting.id">
                     <td><a ui-sref="sighting-detail({id:sighting.id})">{{sighting.id}}</a></td>
                         <td>{{sighting.date | date:'mediumDate'}}</td>
-                    <td>{{sighting.location}}</td>
+                    <td>{{sighting.longitude}}</td>
+                    <td>{{sighting.latitude}}</td>
                     <td>{{sighting.count}}</td>
                     <td>
                         {{sighting.user.id}}

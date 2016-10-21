@@ -17,7 +17,8 @@
                 "title": "Sighting"
             },
             "date": "Date",
-            "location": "Location",
+            "longitude": "Longitude",
+            "latitude": "Latitude",
             "count": "Count",
             "user": "User",
             "animal": "Animal"

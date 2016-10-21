@@ -24,14 +24,34 @@
                 </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="animalSpottingApp.sighting.location" for="field_location">Location</label>
-            <input type="text" class="form-control" name="location" id="field_location"
-                    ng-model="vm.sighting.location"
+            <label class="control-label" data-translate="animalSpottingApp.sighting.longitude" for="field_longitude">Longitude</label>
+            <input type="number" class="form-control" name="longitude" id="field_longitude"
+                    ng-model="vm.sighting.longitude"
                     required />
-            <div ng-show="editForm.location.$invalid">
+            <div ng-show="editForm.longitude.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.location.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.longitude.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.longitude.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="animalSpottingApp.sighting.latitude" for="field_latitude">Latitude</label>
+            <input type="number" class="form-control" name="latitude" id="field_latitude"
+                    ng-model="vm.sighting.latitude"
+                    required />
+            <div ng-show="editForm.latitude.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.latitude.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.latitude.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
                 </p>
             </div>
         </div>

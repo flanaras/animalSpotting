@@ -20,6 +20,36 @@
                     You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
                 </div>
             </div>
+            <style>
+                #map {
+                    height: 400px;
+                    width: 100%;
+                }
+            </style>
+            <div id="map"></div>
+            <script>
+                function initMap() {
+                    var uluru = {lat: -25.363, lng: 131.044};
+                    var uluru2 = {lat: -20.353, lng: 131.604};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 4,
+                        center: uluru
+                    });
+                    var marker = new google.maps.Marker({
+                        position: uluru,
+                        map: map
+                    });
+
+                    var marker2 = new google.maps.Marker({
+                        position: uluru2,
+                        map: map
+                    });
+                }
+            </script>
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLGnwjlilHQ-IeP3vm1YSWeo2584d9swU&callback=initMap">
+            </script>
+
 
             <p data-translate="home.question">
                 If you have any question on JHipster:
