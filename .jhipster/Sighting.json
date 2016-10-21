@@ -8,7 +8,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id",
+            "otherEntityField": "firstName",
             "ownerSide": true
         },
         {
