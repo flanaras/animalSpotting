@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pictureURL",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161021094505",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "animal",
+    "pagination": "pager"
+}

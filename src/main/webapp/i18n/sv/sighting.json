@@ -1,0 +1,26 @@
+{
+    "animalSpottingApp": {
+        "sighting" : {
+            "home": {
+                "title": "Sightings",
+                "createLabel": "Skapa en ny Sighting",
+                "createOrEditLabel": "Skapa eller ändra en Sighting",
+                "search": "Sök efter Sighting"
+            },
+            "created": "En ny Sighting är skapad med id {{ param }}",
+            "updated": "En Sighting är uppdaterad med id  {{ param }}",
+            "deleted": "En Sighting är borttagen med id  {{ param }}",
+            "delete": {
+                "question": "Är du säker på att du vill ta bort Sighting {{ id }}?"
+            },
+            "detail": {
+                "title": "Sighting"
+            },
+            "date": "Date",
+            "location": "Location",
+            "count": "Count",
+            "user": "User",
+            "animal": "Animal"
+        }
+    }
+}

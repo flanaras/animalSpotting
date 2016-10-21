@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="animalSpottingApp.sighting.detail.title">Sighting</span> {{vm.sighting.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="animalSpottingApp.sighting.date">Date</span></dt>
+        <dd>
+            <span>{{vm.sighting.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="animalSpottingApp.sighting.location">Location</span></dt>
+        <dd>
+            <span>{{vm.sighting.location}}</span>
+        </dd>
+        <dt><span data-translate="animalSpottingApp.sighting.count">Count</span></dt>
+        <dd>
+            <span>{{vm.sighting.count}}</span>
+        </dd>
+        <dt><span data-translate="animalSpottingApp.sighting.user">User</span></dt>
+        <dd>
+            {{vm.sighting.user.id}}
+        </dd>
+        <dt><span data-translate="animalSpottingApp.sighting.animal">Animal</span></dt>
+        <dd>
+            <a ui-sref="animal-detail({id:vm.sighting.animal.id})">{{vm.sighting.animal.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sighting-detail.edit({id:vm.sighting.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

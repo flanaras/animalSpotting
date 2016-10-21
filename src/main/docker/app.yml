@@ -1,0 +1,16 @@
+version: '2'
+services:
+    animalspotting-app:
+        image: animalspotting
+        external_links:
+            - animalspotting-mysql:mysql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/animalspotting?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    animalspotting-mysql:
+        extends:
+            file: mysql.yml
+            service: animalspotting-mysql

@@ -1,0 +1,23 @@
+{
+    "animalSpottingApp": {
+        "animal" : {
+            "home": {
+                "title": "Animals",
+                "createLabel": "Skapa en ny Animal",
+                "createOrEditLabel": "Skapa eller ändra en Animal",
+                "search": "Sök efter Animal"
+            },
+            "created": "En ny Animal är skapad med id {{ param }}",
+            "updated": "En Animal är uppdaterad med id  {{ param }}",
+            "deleted": "En Animal är borttagen med id  {{ param }}",
+            "delete": {
+                "question": "Är du säker på att du vill ta bort Animal {{ id }}?"
+            },
+            "detail": {
+                "title": "Animal"
+            },
+            "name": "Name",
+            "pictureURL": "Picture URL"
+        }
+    }
+}
