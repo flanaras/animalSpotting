@@ -23,7 +23,7 @@
                     <th jh-sort-by="longitude"><span data-translate="animalSpottingApp.sighting.longitude">Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="latitude"><span data-translate="animalSpottingApp.sighting.latitude">Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="count"><span data-translate="animalSpottingApp.sighting.count">Count</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.id"><span data-translate="animalSpottingApp.sighting.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.firstName"><span data-translate="animalSpottingApp.sighting.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="animal.name"><span data-translate="animalSpottingApp.sighting.animal">Animal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -36,7 +36,7 @@
                     <td>{{sighting.latitude}}</td>
                     <td>{{sighting.count}}</td>
                     <td>
-                        {{sighting.user.id}}
+                        {{sighting.user.firstName}}
                     </td>
                     <td>
                         <a ui-sref="animal-detail({id:sighting.animal.id})">{{sighting.animal.name}}</a>

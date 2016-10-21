@@ -74,7 +74,7 @@
 
         <div class="form-group">
             <label data-translate="animalSpottingApp.sighting.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" ng-model="vm.sighting.user" ng-options="user as user.id for user in vm.users track by user.id" required>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.sighting.user" ng-options="user as user.firstName for user in vm.users track by user.id" required>
                 <option value=""></option>
             </select>
         </div>

@@ -1,72 +1,66 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
+            <span class="duckhipster img-responsive img-rounded"></span>
         </div>
         <div class="col-md-8">
-            <h1 data-translate="home.title">Welcome, Java Hipster!</h1>
-            <p class="lead" data-translate="home.subtitle">This is your homepage</p>
+            <h1>Welcome to animalSpotting!</h1>
+            <p class="lead">Various animal spottings around the world</p>
 
             <div ng-switch="vm.isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true" data-translate="home.logged.message" translate-values="{username: '{{vm.account.login}}'}">
-                    You are logged in as user "{{vm.account.login}}".
+                <div class="alert alert-success" ng-switch-when="true">
+                    View some recent spottings!
+                </div>
+                <div ng-switch-when="true" translate-compile>
+                    <style>
+                        #map {
+                            height: 400px;
+                            width: 100%;
+                        }
+                    </style>
+                    <div id="map"></div>
+                    <script>
+                        function initMap() {
+
+                            var map;
+                            var vm = window;
+                            var bounds = new google.maps.LatLngBounds();
+                            for (i = 0; i < vm.sightings.length; i++)
+                            {
+                                var sight = vm.sightings[i];
+                                var uluru = {lat: sight.latitude, lng: sight.longitude};
+                                if (i == 0) {
+                                    map = new google.maps.Map(document.getElementById('map'), {
+                                        zoom:4,
+                                        center: uluru
+                                    });
+                                }
+                                //bounds.extend(new google.maps.LatLng(sight.latitude, sight.longitude));
+                                var marker = new google.maps.Marker({
+                                    position: uluru,
+                                    map: map,
+                                    title: "fooBar"
+                                });
+
+                                //map.fitBounds(bounds);
+
+                            }
+                        }
+                    </script>
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLGnwjlilHQ-IeP3vm1YSWeo2584d9swU&callback=initMap">
+                    </script>
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.authenticated" translate-compile>
-                    If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
+                <div class="alert alert-warning" ng-switch-when="false" translate-compile>
+                    Sign it in order to <i>get access</i> to the sightings!
+                    <br>
+                    <br>
+                    You don't have an account yet? <a class="alert-link" style="color: lightseagreen" ui-sref="register">Register a new account</a>
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.register" translate-compile>
-                    You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
-                </div>
             </div>
-            <style>
-                #map {
-                    height: 400px;
-                    width: 100%;
-                }
-            </style>
-            <div id="map"></div>
-            <script>
-                function initMap() {
-                    var uluru = {lat: -25.363, lng: 131.044};
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 4,
-                        center: uluru
-                    });
 
-                    var vm = window;
-                    for (i = 0; i < vm.sightings.length; i++)
-                    {
-                        var sight = vm.sightings[i];
-                        var uluru = {lat: sight.latitude, lng: sight.longitude};
-                        var marker = new google.maps.Marker({
-                            position: uluru,
-                            map: map
-                        });
-
-                    }
-                }
-            </script>
-            <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLGnwjlilHQ-IeP3vm1YSWeo2584d9swU&callback=initMap">
-            </script>
-
-            <p data-translate="home.question">
-                If you have any question on JHipster:
-            </p>
-
-            <ul>
-                <li><a href="http://jhipster.github.io/" target="_blank" data-translate="home.link.homepage">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" data-translate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" data-translate="home.link.bugtracker">JHipster bug tracker</a></li>
-                <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" data-translate="home.link.chat">JHipster public chat room</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank"  data-translate="home.link.follow">follow @java_hipster on Twitter</a></li>
-            </ul>
-
-            <p>
-             <span data-translate="home.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" data-translate="home.github">Github</a>!
-            </p>
         </div>
     </div>
 </div>
