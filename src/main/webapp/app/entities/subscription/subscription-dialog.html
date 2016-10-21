@@ -1,0 +1,56 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySubscriptionLabel" data-translate="animalSpottingApp.subscription.home.createOrEditLabel">Create or edit a Subscription</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.subscription.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.subscription.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="animalSpottingApp.subscription.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.subscription.description"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="animalSpottingApp.subscription.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.subscription.user" ng-options="user as user.firstName for user in vm.users track by user.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.user.$invalid">
+            <p class="help-block"
+                ng-show="editForm.user.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="animalSpottingApp.subscription.animal" for="field_animal">Animal</label>
+            <select class="form-control" id="field_animal" name="animal" ng-model="vm.subscription.animal" ng-options="animal as animal.name for animal in vm.animals track by animal.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.animal.$invalid">
+            <p class="help-block"
+                ng-show="editForm.animal.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,24 @@
+{
+    "animalSpottingApp": {
+        "subscription" : {
+            "home": {
+                "title": "Subscriptions",
+                "createLabel": "Skapa en ny Subscription",
+                "createOrEditLabel": "Skapa eller ändra en Subscription",
+                "search": "Sök efter Subscription"
+            },
+            "created": "En ny Subscription är skapad med id {{ param }}",
+            "updated": "En Subscription är uppdaterad med id  {{ param }}",
+            "deleted": "En Subscription är borttagen med id  {{ param }}",
+            "delete": {
+                "question": "Är du säker på att du vill ta bort Subscription {{ id }}?"
+            },
+            "detail": {
+                "title": "Subscription"
+            },
+            "description": "Description",
+            "user": "User",
+            "animal": "Animal"
+        }
+    }
+}
